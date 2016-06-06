@@ -5,7 +5,6 @@ public class GameManager : MonoBehaviour {
 	CursorLockMode cursorOption;
 	// Use this for initialization
 	void Start () {
-
 	}
 	
 	// Update is called once per frame
