@@ -13,6 +13,6 @@ public class warriorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = Vector3.MoveTowards (transform.position, GameObject.Find ("Cannon").transform.position, step);
+		transform.position = Vector3.MoveTowards (transform.position, GameObject.Find ("CannonController").transform.position, step);
 	}
 }

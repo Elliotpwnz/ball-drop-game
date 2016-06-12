@@ -6,13 +6,11 @@ public class CannonController : MonoBehaviour {
 	public float RotationSpeed;
 	private Vector3 dir;
 	public float ballSpeed;
-	public GameObject theCannon;
 	public float forwardAngle;
 	public int rotator;
 
 	// Use this for initialization
 	void Start () {
-		theCannon.GetComponent<Renderer>().material.color = Color.red;
 		rotator = -1;
 	}
 	
@@ -36,11 +34,11 @@ public class CannonController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
 
 		if (Input.GetButtonDown("Fire1")) {
-			dir = theCannon.transform.forward;
+			dir = transform.forward;
 			GameObject cannonBall = Instantiate (Resources.Load ("Cannonball")) as GameObject;
 			cannonBall.GetComponent<Renderer> ().material.color = Color.black;
 			Rigidbody rb = cannonBall.GetComponent<Rigidbody> ();
-			cannonBall.transform.position = theCannon.transform.position;
+			cannonBall.transform.position = GameObject.Find ("cannon (model)").transform.position;
 			rb.AddForce (dir * ballSpeed);
 		}
 	}
