@@ -4,9 +4,8 @@ using System.Collections;
 public class CannonController : MonoBehaviour {
 
 	public float RotationSpeed;
-	private Vector3 dir;
-	public float ballSpeed;
-	public float forwardAngle;
+	public GameObject cannonBall;
+	public Transform ballSpawn;
 	public int rotator;
 
 	// Use this for initialization
@@ -33,13 +32,8 @@ public class CannonController : MonoBehaviour {
 		//transform.Rotate((Input.GetAxis("Mouse Y") * rotator * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), 0, Space.World);
 		transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
 
-		if (Input.GetButtonDown("Fire1")) {
-			dir = transform.forward;
-			GameObject cannonBall = Instantiate (Resources.Load ("Cannonball")) as GameObject;
-			cannonBall.GetComponent<Renderer> ().material.color = Color.black;
-			Rigidbody rb = cannonBall.GetComponent<Rigidbody> ();
-			cannonBall.transform.position = GameObject.Find ("cannon (model)").transform.position;
-			rb.AddForce (dir * ballSpeed);
+		if (Input.GetButtonDown ("Fire1")) {
+			Instantiate (cannonBall, ballSpawn.position, ballSpawn.rotation);
 		}
 	}
 }
