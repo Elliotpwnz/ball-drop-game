@@ -7,10 +7,14 @@ public class RotatorController : MonoBehaviour {
 	public GameObject cannonBall;
 	public Transform ballSpawn;
 	public int rotator;
+	public int maxBalls;
+	public int remainingBalls;
 
 	// Use this for initialization
 	void Start () {
 		rotator = -1;
+		remainingBalls = maxBalls;
+		InvokeRepeating ("refreshBalls", 3, 3); //Runs the refreshBalls() function every 3 seconds
 	}
 
 	// Update is called once per frame
@@ -32,8 +36,15 @@ public class RotatorController : MonoBehaviour {
 		//transform.Rotate((Input.GetAxis("Mouse Y") * rotator * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), 0, Space.World);
 		transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
 
-		if (Input.GetButtonDown ("Fire1")) {
+		if (Input.GetButtonDown ("Fire1") && remainingBalls > 0) {
 			Instantiate (cannonBall, ballSpawn.position, ballSpawn.rotation);
+			remainingBalls--;
+		}
+	}
+
+	void refreshBalls(){
+		if (remainingBalls < maxBalls) {
+			remainingBalls++;
 		}
 	}
 }
