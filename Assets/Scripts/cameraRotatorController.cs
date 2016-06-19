@@ -4,6 +4,9 @@ using System.Collections;
 public class cameraRotatorController : MonoBehaviour {
 	public bool startRotating;
 	public float rotateSpeed;
+	public GameObject cannon;
+	public GameObject cameraRotator;
+	public GameObject mainCamera;
 	// Use this for initialization
 	void Start () {
 	
@@ -20,6 +23,8 @@ public class cameraRotatorController : MonoBehaviour {
 				Mathf.Abs(transform.localEulerAngles.z - target.z) < 5) {
 				startRotating = false;
 				transform.localEulerAngles = new Vector3 (0.0f, 356.0f, 90.0f);
+				mainCamera.transform.parent = cannon.transform;
+				Destroy (gameObject);
 			}
 		}
 	}
