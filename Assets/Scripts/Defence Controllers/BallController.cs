@@ -15,6 +15,13 @@ public class BallController : MonoBehaviour {
 		ballRigidBody.AddForce (aimingDirection * thrust);
 	}
 
+	void OnCollisionEnter(Collision coll){
+		GameObject hb = coll.gameObject.transform.FindChild ("healthBar").gameObject;
+		if (hb) {
+			hb.GetComponent<healthbarController> ().currentHealth -= 2;
+		}
+	}
+
 	void FixedUpdate(){
 		//transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
 		//ballRigidBody.AddForce (speed);
