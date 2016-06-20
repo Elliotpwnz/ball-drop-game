@@ -9,15 +9,18 @@ public class canvasController : MonoBehaviour {
 	public GameObject cannon;
 	public GameObject cameraRotator;
 	public GameObject mainCamera;
+	private bool gameStarted;
 
 	// Use this for initialization
 	void Start () {
+		gameStarted = false;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.anyKey) {
+		if (Input.anyKey && !gameStarted) {
+			gameStarted = true;
 			pressEnterText.GetComponent<UnityEngine.UI.Text> ().text = "";
 			cameraRotator.GetComponent<cameraRotatorController> ().startRotating = true;
 		}
