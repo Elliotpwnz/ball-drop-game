@@ -3,12 +3,16 @@ using System.Collections;
 
 public class ArcherController : MonoBehaviour {
 
+	public GameObject HealthBar;
 	public Transform arrowSpawn;
 	public GameObject Arrow;
 	public float enemySpeed;
 	private float step;
 	private int fireRate = 5;
 	float nextFire;
+
+	public bool gotShot;
+
 	// Use this for initialization
 	void Start () {
 		GetComponent<Renderer> ().material.color = Color.green;
@@ -18,10 +22,21 @@ public class ArcherController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		gotShot = false;
 		if (Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 			Instantiate (Arrow, arrowSpawn.position, arrowSpawn.rotation);
 
+		}
+
+		if (HealthBar.GetComponent<healthbarController> ().currentHealth <= 0) {
+			Destroy (gameObject);
+		}
+	}
+
+	void OnCollisionEnter(Collision coll){
+		if (coll.gameObject.tag == "Ball") {
+			gotShot = true;
 		}
 	}
 }
