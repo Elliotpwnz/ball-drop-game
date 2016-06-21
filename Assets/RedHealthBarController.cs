@@ -6,7 +6,7 @@ public class RedHealthBarController : MonoBehaviour {
 	public int currentHealth;
 	public int maxHealth;
 	public float healthPercent;
-	float oldScaleX;
+	public float oldScaleX;
 	public Vector3 currentScale;
 	public float newScaleX;
 
@@ -14,10 +14,7 @@ public class RedHealthBarController : MonoBehaviour {
 	void Start () {
 		gameObject.GetComponent<Renderer> ().material.color = Color.red;
 		currentHealth = 0;
-		//currentHealth = maxHealth;
-		oldScaleX = GreenHealthBar.GetComponent<GreenHealthBarController>().oldScaleX;
-
-
+		oldScaleX = GreenHealthBar.transform.localScale.x;
 	}
 
 	// Update is called once per frame
