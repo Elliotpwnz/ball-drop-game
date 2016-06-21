@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ArcherController : MonoBehaviour {
 
-	public GameObject HealthBar;
+	public GameObject GreenHealthBar;
 	public Transform arrowSpawn;
 	public GameObject Arrow;
 	public float enemySpeed;
@@ -29,7 +29,7 @@ public class ArcherController : MonoBehaviour {
 
 		}
 
-		if (HealthBar.GetComponent<healthbarController> ().currentHealth <= 0) {
+		if (GreenHealthBar.GetComponent<GreenHealthBarController> ().currentHealth <= 0) {
 			Destroy (gameObject);
 		}
 	}
