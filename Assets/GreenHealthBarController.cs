@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GreenHealthBarController : MonoBehaviour {
 
-	public GameObject ConcernedObject;
+	public GameObject HolderObject;
 
 	public int currentHealth;
 	public int maxHealth;
@@ -17,8 +17,6 @@ public class GreenHealthBarController : MonoBehaviour {
 		gameObject.GetComponent<Renderer> ().material.color = Color.green;
 		currentHealth = maxHealth;
 		oldScaleX = transform.localScale.x;
-
-
 	}
 
 	// Update is called once per frame
@@ -33,7 +31,7 @@ public class GreenHealthBarController : MonoBehaviour {
 
 		}
 
-		if (ConcernedObject.GetComponent<ArcherController> ().gotShot) {
+		if (HolderObject.GetComponent<ArcherController> ().gotShot) {
 			currentHealth -= 2;
 		}
 	}
