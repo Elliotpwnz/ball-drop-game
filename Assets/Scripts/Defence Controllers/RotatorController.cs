@@ -37,6 +37,7 @@ public class RotatorController : MonoBehaviour {
 		transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
 
 		if (Input.GetButtonDown ("Fire1") && remainingBalls > 0) {
+			GetComponent<AudioSource> ().Play ();
 			Instantiate (cannonBall, ballSpawn.position, ballSpawn.rotation);
 			remainingBalls--;
 		}
