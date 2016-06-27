@@ -14,7 +14,7 @@ public class RotatorController : MonoBehaviour {
 	void Start () {
 		rotator = -1;
 		remainingBalls = maxBalls;
-		InvokeRepeating ("refreshBalls", 3, 3); //Runs the refreshBalls() function every 3 seconds
+		InvokeRepeating ("refreshBalls", 2, 2); //Runs the refreshBalls() function every 3 seconds
 	}
 
 	// Update is called once per frame

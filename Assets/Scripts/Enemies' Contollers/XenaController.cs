@@ -18,6 +18,9 @@ public class XenaController : MonoBehaviour {
 		standingUp = true;
 		alreadyStarted = false;
 		strikingInvoked = false;
+		if (!barricade) {
+			barricade = GameObject.Find ("Barricades_001 (9)").gameObject;
+		}
 		barricadeHealth = GameObject.Find ("BarricadesToStrike1").GetComponent<barricadeController> ().HealthBar.gameObject;
 
 	}

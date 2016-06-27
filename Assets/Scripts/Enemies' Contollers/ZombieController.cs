@@ -20,7 +20,9 @@ public class ZombieController : MonoBehaviour {
 		standingUp = true;
 		strikingInvoked = false;
 		barricadeHealth = GameObject.Find ("BarricadesToStrike1").GetComponent<barricadeController> ().HealthBar.gameObject;
-
+		if (!barricade) {
+			barricade = GameObject.Find ("Barricades_001 (1)").gameObject;
+		}
 	}
 
 	// Update is called once per frame
