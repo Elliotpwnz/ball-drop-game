@@ -4,9 +4,11 @@ using System.Collections;
 public class GameManagerController : MonoBehaviour {
 	public GameObject[] enemies;
 	private GameObject Archer, Knight, Necromancer, Wizard;
+	public bool start;
 
 	// Use this for initialization
 	void Start () {
+		start = false;
 		Archer = enemies [0];
 		Knight = enemies [1];
 		Necromancer = enemies [2];
