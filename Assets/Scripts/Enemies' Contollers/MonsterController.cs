@@ -6,12 +6,13 @@ public class MonsterController : MonoBehaviour {
 	public GameObject HealthBar;
 	public GameObject barricade;
 	public float enemySpeed;
-	bool alreadyStarted;
+	bool alreadyStarted, standingUp;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
 		alreadyStarted = false;
+		standingUp = true;
 	}
 
 	// Update is called once per frame
@@ -22,15 +23,22 @@ public class MonsterController : MonoBehaviour {
 				animator.SetBool ("run", true);
 				animator.SetBool ("idle", false);
 			}
-			alreadyStarted = true;
 			transform.localEulerAngles = new Vector3 (0, 180, 0);
-			float step = enemySpeed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards(transform.position, barricade.transform.position, step);
-		}
 
+			alreadyStarted = true;
+			if (standingUp) {
+				float step = enemySpeed * Time.deltaTime;
+				transform.position = Vector3.MoveTowards(transform.position, barricade.transform.position, step);
+			}
+		}
+			
 
 		if (HealthBar.GetComponent<HealthBarController>().greenCurrentHealth <= 0) {
 			GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
+			animator.SetBool ("isHit", true);
+			animator.SetBool ("attack2", false);
+			animator.SetBool ("die", true);
+			standingUp = false;
 			Destroy (gameObject);
 		}
 	}
@@ -44,6 +52,8 @@ public class MonsterController : MonoBehaviour {
 		if(coll.gameObject.tag =="Baricade2"){
 			print ("Monster starts Striking..!!");
 			animator.SetBool ("attack2", true);
+			animator.SetBool ("run", false);
+
 		}
 	}
 }
