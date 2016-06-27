@@ -24,6 +24,7 @@ public class ZombieController : MonoBehaviour {
 
 
 		if (HealthBar.GetComponent<HealthBarController>().greenCurrentHealth <= 0) {
+			GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
 			Destroy (gameObject);
 		}
 	}

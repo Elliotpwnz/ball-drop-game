@@ -9,7 +9,9 @@ public class canvasController : MonoBehaviour {
 	public GameObject cannon;
 	public GameObject cameraRotator;
 	public GameObject mainCamera;
+	public GameObject scoreText;
 	private bool gameStarted;
+	public int score;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +27,7 @@ public class canvasController : MonoBehaviour {
 			cameraRotator.GetComponent<cameraRotatorController> ().startRotating = true;
 		}
 
-
+		scoreText.GetComponent<UnityEngine.UI.Text> ().text = "Score:" + score;
 		remainingBallsText.GetComponent<UnityEngine.UI.Text> ().text = cannonRotator.GetComponent<RotatorController>().remainingBalls.ToString();
 	}
 }
