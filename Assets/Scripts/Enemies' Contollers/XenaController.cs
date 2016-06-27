@@ -1,23 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class enemyScript : MonoBehaviour {
+public class XenaController : MonoBehaviour {
 
+	public Animator animator;
 	public GameObject HealthBar;
 	public GameObject barricade;
 	public float enemySpeed;
 
 	// Use this for initialization
 	void Start () {
-
+		animator = GetComponent<Animator> ();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		float step = enemySpeed * Time.deltaTime;
-	
-		transform.position = Vector3.MoveTowards(transform.position, barricade.transform.position, step);
+		if (GameObject.Find ("cyclop_soldier").GetComponent<MonsterController> ().followTheMonster) {
+			animator.SetBool ("walk", true);
+			animator.SetBool ("idle", false);
+			//transform.localEulerAngles = new Vector3 (0, 180, 0);
+			//float step = enemySpeed * Time.deltaTime;
+			//transform.position = Vector3.MoveTowards(transform.position, barricade.transform.position, step);
+		}
+
 
 		if (HealthBar.GetComponent<HealthBarController>().greenCurrentHealth <= 0) {
 			Destroy (gameObject);
