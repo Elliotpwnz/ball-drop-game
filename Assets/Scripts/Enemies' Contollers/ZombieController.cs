@@ -52,6 +52,7 @@ public class ZombieController : MonoBehaviour {
 				Instantiate (Resources.Load ("zombie"), GameObject.Find ("Spawnpoint1").gameObject.transform.position, Quaternion.Euler(0,180,0));
 			}
 			standingUp = false;
+			Invoke ("death", 3.0f);
 		}
 	}
 
@@ -93,5 +94,9 @@ public class ZombieController : MonoBehaviour {
 				UnityEngine.SceneManagement.SceneManager.LoadScene ("gameOver");
 			}
 		}
+	}
+
+	void death(){
+		Destroy (gameObject);
 	}
 }

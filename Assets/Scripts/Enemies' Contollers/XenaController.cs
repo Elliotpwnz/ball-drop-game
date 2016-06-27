@@ -55,6 +55,7 @@ public class XenaController : MonoBehaviour {
 				Instantiate (Resources.Load ("zena"), GameObject.Find ("Spawnpoint2").gameObject.transform.position, Quaternion.Euler(0,180,0));
 			}
 			standingUp = false;
+			Invoke("death", 3.0f);
 			//Destroy (gameObject);
 		}
 	}
@@ -88,5 +89,9 @@ public class XenaController : MonoBehaviour {
 				UnityEngine.SceneManagement.SceneManager.LoadScene ("gameOver");
 			}
 		}
+	}
+
+	void death(){
+		Destroy (gameObject);
 	}
 }
