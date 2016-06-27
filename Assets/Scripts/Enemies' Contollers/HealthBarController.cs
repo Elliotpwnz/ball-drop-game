@@ -22,7 +22,7 @@ public class HealthBarController : MonoBehaviour {
 
 		//RedHealthBar set up
 		RedHealthBar.GetComponent<Renderer> ().material.color = Color.red;
-		redPosition = new Vector3((GreenHealthBar.transform.position.x + GreenHealthBar.transform.localScale.x / 2), GreenHealthBar.transform.position.y, GreenHealthBar.transform.position.z);
+		redPosition = new Vector3((GreenHealthBar.transform.position.x + GreenHealthBar.transform.lossyScale.x / 2), GreenHealthBar.transform.position.y, GreenHealthBar.transform.position.z);
 		RedHealthBar.transform.position = redPosition;
 		redCurrentHealth = 0;
 		redOldScaleX = GreenHealthBar.transform.localScale.x;
