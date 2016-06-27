@@ -16,7 +16,7 @@ public class XenaController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (GameObject.Find ("cyclop_soldier").GetComponent<MonsterController> ().followTheMonster) {
+		if (GameObject.Find ("Game Manager").GetComponent<GameManagerController> ().start){
 			animator.SetBool ("walk", true);
 			animator.SetBool ("idle", false);
 			//transform.localEulerAngles = new Vector3 (0, 180, 0);
