@@ -40,9 +40,9 @@ public class ArcherController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll){
-		if (coll.gameObject.tag == "Ball") {
+	//	if (coll.gameObject.tag == "Ball") {
 			HealthBar.GetComponent<HealthBarController>().greenCurrentHealth -= 2;
 			HealthBar.GetComponent<HealthBarController>().redCurrentHealth += 2;
 		}
-	}
+	//}
 }
