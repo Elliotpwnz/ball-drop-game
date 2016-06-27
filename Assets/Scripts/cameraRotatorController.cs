@@ -9,7 +9,6 @@ public class cameraRotatorController : MonoBehaviour {
 	public GameObject mainCamera;
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -21,6 +20,8 @@ public class cameraRotatorController : MonoBehaviour {
 				Mathf.Abs(transform.localEulerAngles.y - target.y) < 8 && 
 				Mathf.Abs(transform.localEulerAngles.z - target.z) < 8) {
 				startRotating = false;
+				GameObject.Find ("cyclop_soldier").GetComponent<MonsterController> ().animateMonster = true;
+				//GameObject.Find ("A03").GetComponent<XenaController> ().animateXena = true;
 				transform.localEulerAngles = new Vector3 (0.0f, 356.0f, 90.0f);
 				mainCamera.transform.parent = cannon.transform;
 				Destroy (gameObject);
