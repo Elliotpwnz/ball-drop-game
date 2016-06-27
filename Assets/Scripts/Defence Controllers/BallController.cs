@@ -21,4 +21,10 @@ public class BallController : MonoBehaviour {
 		//transform.Rotate((Input.GetAxis("Mouse Y") * rotator * RotationSpeed * Time.deltaTime), (Input.GetAxis("Mouse X") * RotationSpeed * Time.deltaTime), 0, Space.World);
 		//transform.rotation = Quaternion.Euler (transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0.0f);
 	}
+
+	void OnCollisionEnter(Collision coll){
+		if(coll.gameObject.tag == "ground"){
+			Destroy (gameObject);
+		}
+	}
 }
