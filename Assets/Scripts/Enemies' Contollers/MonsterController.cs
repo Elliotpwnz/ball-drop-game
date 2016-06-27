@@ -7,12 +7,16 @@ public class MonsterController : MonoBehaviour {
 	public GameObject barricade;
 	public float enemySpeed;
 	bool alreadyStarted, standingUp;
+	public bool strikingInvoked;
+	public GameObject barricadeHealth;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
 		alreadyStarted = false;
 		standingUp = true;
+		strikingInvoked = false;
+		barricadeHealth = GameObject.Find ("BarricadesToStrike1").GetComponent<barricadeController> ().HealthBar.gameObject;
 	}
 
 	// Update is called once per frame
@@ -34,10 +38,10 @@ public class MonsterController : MonoBehaviour {
 			
 
 		if (HealthBar.GetComponent<HealthBarController>().greenCurrentHealth <= 0) {
-			GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
 			animator.SetBool ("isHit", true);
 			animator.SetBool ("attack2", false);
 			animator.SetBool ("die", true);
+			GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
 			standingUp = false;
 			Destroy (gameObject);
 		}
@@ -52,8 +56,22 @@ public class MonsterController : MonoBehaviour {
 		if(coll.gameObject.tag =="Baricade2"){
 			print ("Monster starts Striking..!!");
 			animator.SetBool ("attack2", true);
+			if (!strikingInvoked) {
+				InvokeRepeating ("strike", 3.0f, 3.0f);
+				strikingInvoked = true;
+			}
 			animator.SetBool ("run", false);
 
+		}
+			
+	}
+
+	void strike(){
+		barricadeHealth.GetComponent<HealthBarController>().greenCurrentHealth -= 2;
+		 barricadeHealth.GetComponent<HealthBarController>().redCurrentHealth += 2;
+
+		if (barricadeHealth.GetComponent<HealthBarController> ().greenCurrentHealth <= 0) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene ("gameOver");
 		}
 	}
 }

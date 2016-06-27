@@ -8,12 +8,18 @@ public class XenaController : MonoBehaviour {
 	public GameObject barricade;
 	public float enemySpeed;
 	bool standingUp, alreadyStarted;
+	public bool strikingInvoked;
+	public GameObject barricadeHealth;
+	public GameObject spawnpoint;
 
 	// Use this for initialization
 	void Start () {
 		animator = GetComponent<Animator> ();
 		standingUp = true;
 		alreadyStarted = false;
+		strikingInvoked = false;
+		barricadeHealth = GameObject.Find ("BarricadesToStrike1").GetComponent<barricadeController> ().HealthBar.gameObject;
+
 	}
 
 	// Update is called once per frame
@@ -38,11 +44,13 @@ public class XenaController : MonoBehaviour {
 
 
 		if (HealthBar.GetComponent<HealthBarController>().greenCurrentHealth <= 0) {
-			GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
 			animator.SetBool ("die", true);
 			animator.SetBool ("attack", false);
 			animator.SetBool ("walk", false);
-
+			if (standingUp) {
+				GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
+				Instantiate (Resources.Load ("zena"), GameObject.Find ("Spawnpoint2").gameObject.transform.position, Quaternion.Euler(0,180,0));
+			}
 			standingUp = false;
 			//Destroy (gameObject);
 		}
@@ -59,8 +67,23 @@ public class XenaController : MonoBehaviour {
 			animator.SetBool ("attack", true);
 			animator.SetBool ("run", false);
 			animator.SetBool ("walk", true);
+			if (!strikingInvoked) {
+				InvokeRepeating ("strike", 3.0f, 3.0f);
+				strikingInvoked = true;
+			}
 
 
+		}
+	}
+
+	void strike(){
+		if (standingUp) {
+			barricadeHealth.GetComponent<HealthBarController> ().greenCurrentHealth -= 2;
+			barricadeHealth.GetComponent<HealthBarController> ().redCurrentHealth += 2;
+
+			if (barricadeHealth.GetComponent<HealthBarController> ().greenCurrentHealth <= 0) {
+				UnityEngine.SceneManagement.SceneManager.LoadScene ("gameOver");
+			}
 		}
 	}
 }

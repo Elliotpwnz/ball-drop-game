@@ -23,8 +23,10 @@ public class BallController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision coll){
-		if(coll.gameObject.tag == "ground"){
-			Destroy (gameObject);
-		}
+		Invoke ("ballDeath", 1.0f);
+	}
+
+	void ballDeath(){
+		Destroy (gameObject);
 	}
 }
