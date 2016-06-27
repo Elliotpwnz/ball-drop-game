@@ -41,6 +41,8 @@ public class XenaController : MonoBehaviour {
 			GameObject.Find ("Canvas").GetComponent<canvasController> ().score++;
 			animator.SetBool ("die", true);
 			animator.SetBool ("attack", false);
+			animator.SetBool ("walk", false);
+
 			standingUp = false;
 			//Destroy (gameObject);
 		}
@@ -56,6 +58,8 @@ public class XenaController : MonoBehaviour {
 			print ("Xena starts Striking..!!");
 			animator.SetBool ("attack", true);
 			animator.SetBool ("run", false);
+			animator.SetBool ("walk", true);
+
 
 		}
 	}
